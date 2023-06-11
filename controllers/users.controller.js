@@ -46,12 +46,12 @@ module.exports.checkAdmin = async (req, res) => {
 //check user admin or not
 module.exports.checkInstructor = async (req, res) => {
   const email = req.params.email;
-  // if (req.decoded.email !== email) {
-  //   res.send({ admin: false });
-  // }
+  if (req.decoded.email !== email) {
+    res.send({ instructor: false });
+  }
   const query = { email: email };
   const user = await usersCollection.findOne(query);
-  const result = { admin: user?.role === "instructor" };
+  const result = { instructor: user?.role === "instructor" };
   res.send(result);
 };
 module.exports.makeInstructor = async (req, res) => {

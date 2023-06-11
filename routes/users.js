@@ -6,7 +6,11 @@ const { varifyJWT, verifyAdmin } = require("../middlewares/middlewares");
 router.get("/", varifyJWT, verifyAdmin, usersController.findAll);
 router.post("/", usersController.addUser);
 router.get("/check-admin/:email", varifyJWT, usersController.checkAdmin);
-router.get("/check-instructor/:email", usersController.checkInstructor);
+router.get(
+  "/check-instructor/:email",
+  varifyJWT,
+  usersController.checkInstructor
+);
 router.patch("/make-instructor/:id", usersController.makeInstructor);
 
 module.exports = router;
