@@ -5,6 +5,34 @@ module.exports.findAll = async (req, res) => {
   let classes = await usersCollection.find().toArray();
   res.send(classes);
 };
+module.exports.findOne = async (req, res) => {
+  const userEmail = req.params.email;
+  try {
+    const userWithClasses = await usersCollection
+      .aggregate([
+        {
+          $match: { email: userEmail },
+        },
+        {
+          $lookup: {
+            from: "classes",
+            localField: "classes",
+            foreignField: "_id",
+            as: "classes",
+          },
+        },
+      ])
+      .toArray();
+
+    if (userWithClasses.length === 0) {
+      return res.status(404).send("User not found");
+    }
+
+    res.send(userWithClasses[0]);
+  } catch (error) {
+    res.status(500).send("Error retrieving user with classes");
+  }
+};
 
 module.exports.addUser = async (req, res) => {
   const user = req.body;
