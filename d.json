@@ -1,0 +1,122 @@
+[
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img1.jpg",
+    "name": "Hatha",
+    "className": "For Beginners",
+    "instructorName": "Emily Johnson",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img1.jpg",
+    "availableSeats": 15,
+    "bookedSeats": 4,
+    "price": 10,
+    "scheduledDays": ["Sunday", "Tuesday", "Wednesday"],
+    "scheduledTime": "7:00 am"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img2.jpg",
+    "name": "Vinyasa",
+    "className": "Flow",
+    "instructorName": "David Thompson",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img2.jpg",
+    "availableSeats": 12,
+    "bookedSeats": 5,
+    "price": 12,
+    "scheduledDays": ["Monday", "Wednesday", "Friday"],
+    "scheduledTime": "8:00 am"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img3.jpg",
+    "name": "Restorative",
+    "className": "Relax and Restore",
+    "instructorName": "Sarah Collins",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img4.jpg",
+    "availableSeats": 10,
+    "bookedSeats": 6,
+    "price": 15,
+    "scheduledDays": ["Tuesday", "Thursday", "Saturday"],
+    "scheduledTime": "6:00 pm"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img4.jpg",
+    "name": "Power",
+    "className": "For Strength",
+    "instructorName": "Michael Ramirez",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img5.jpg",
+    "availableSeats": 8,
+    "bookedSeats": 4,
+    "price": 18,
+    "scheduledDays": ["Monday", "Wednesday", "Friday"],
+    "scheduledTime": "5:30 pm"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img5.jpg",
+    "name": "Kundalini",
+    "className": "Awakening the Spirit",
+    "instructorName": "Jessica Anderson",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img3.jpg",
+    "availableSeats": 10,
+    "bookedSeats": 7,
+    "price": 15,
+    "scheduledDays": ["Tuesday", "Thursday", "Saturday"],
+    "scheduledTime": "9:00 am"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img6.jpg",
+    "name": "Yin",
+    "className": "Deep Stretch",
+    "instructorName": "Rajesh Patel",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img6.jpg",
+    "availableSeats": 12,
+    "bookedSeats": 6,
+    "price": 12,
+    "scheduledDays": ["Monday", "Wednesday", "Friday"],
+    "scheduledTime": "7:30 pm"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img1.jpg",
+    "name": "Pilates",
+    "className": "Finding Inner Peace",
+    "instructorName": "Olivia Adams",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img1.jpg",
+    "availableSeats": 15,
+    "bookedSeats": 5,
+    "price": 10,
+    "scheduledDays": ["Tuesday", "Thursday", "Saturday"],
+    "scheduledTime": "8:00 am"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img3.jpg",
+    "name": "Pilates",
+    "className": "Calm and Centered",
+    "instructorName": "Daniel Wilson",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img2.jpg",
+    "availableSeats": 8,
+    "bookedSeats": 5,
+    "price": 18,
+    "scheduledDays": ["Monday", "Wednesday", "Friday"],
+    "scheduledTime": "6:30 pm"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img2.jpg",
+    "name": "Nidra",
+    "className": "Deep Relaxation",
+    "instructorName": "Sophia Roberts",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img3.jpg",
+    "availableSeats": 12,
+    "bookedSeats": 3,
+    "price": 12,
+    "scheduledDays": ["Tuesday", "Thursday", "Saturday"],
+    "scheduledTime": "7:00 pm"
+  },
+  {
+    "yogaImage": "https://bestwebcreator.com/dhyana/demo/assets/images/classes_img4.jpg",
+    "name": "Pranayama",
+    "className": "Breath Control",
+    "instructorName": "Alex Johnson",
+    "instructorImage": "https://bestwebcreator.com/dhyana/demo/assets/images/cl_teacher_img3.jpg",
+    "availableSeats": 10,
+    "bookedSeats": 2,
+    "price": 15,
+    "scheduledDays": ["Wednesday", "Friday", "Sunday"],
+    "scheduledTime": "9:30 am"
+  }
+]
