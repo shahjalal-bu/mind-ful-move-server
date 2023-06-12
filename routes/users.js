@@ -12,5 +12,6 @@ router.get(
   usersController.checkInstructor
 );
 router.patch("/make-instructor/:id", usersController.makeInstructor);
+router.patch("/select-class/:email", usersController.selecteClass);
 
 module.exports = router;

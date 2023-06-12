@@ -9,7 +9,6 @@ module.exports.findAll = async (req, res) => {
 };
 
 //add class
-
 module.exports.addClass = async (req, res) => {
   const newClass = req.body;
   const userEmail = newClass.instructorEmail;
@@ -34,6 +33,9 @@ module.exports.addClass = async (req, res) => {
     class: insertedClass,
   });
 };
+
+
+
 //update class status to approved
 
 module.exports.aprrovedClass = async (req, res) => {

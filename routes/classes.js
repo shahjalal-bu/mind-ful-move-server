@@ -3,7 +3,7 @@ const router = express.Router();
 const classesController = require("../controllers/classes.controller");
 const { varifyJWT, verifyAdmin } = require("../middlewares/middlewares");
 
-router.get("/", varifyJWT, verifyAdmin, classesController.findAll);
+router.get("/", classesController.findAll);
 router.post("/", classesController.addClass);
 router.patch(
   "/approved-class/:classId",

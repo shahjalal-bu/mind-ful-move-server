@@ -94,3 +94,15 @@ module.exports.makeInstructor = async (req, res) => {
   const result = await usersCollection.updateOne(filter, updateDoc);
   res.send(result);
 };
+
+//selected class and push to id user model
+
+module.exports.selecteClass = async (req, res) => {
+  const userEmail = req.params.email;
+  const classId = req.body.classId;
+  usersCollection.updateOne(
+    { email: userEmail },
+    { $push: { selectedClasses: classId } }
+  );
+  res.send("Class ID pushed to database");
+};
