@@ -1,46 +1,25 @@
-## Table of contents
+# MindFulMove
 
-- [General info](#general-info)
-- [Technologies](#technologies)
-- [Setup](#setup)
+![Website Logo](https://mindfulmove.netlify.app/assets/logo-9bfb98c9.png)
 
-## General info
+A brief description of your website and its purpose.
 
-Edutoyhub is a multi vendor ecommerce site.
+## Features
 
-## Technologies
+1. Feature 1: instructor ceate class
+2. Feature 2: instructor
+3. Feature 3: role based authorigation
+4. Feature 4: payement system
+5. Feature 5: photo upload system
 
-Project is created with:
+## Packages/Technology Used
 
-- "cors": "^2.8.5",
-- "dotenv": "^16.0.3",
-- "express": "^4.18.2",
-- "mongodb": "^5.5.0",
-- "nodemon": "^2.0.22"
+- [Express.js](https://expressjs.com/) - Web application framework for Node.js
+- [Node.js](https://nodejs.org/) - JavaScript runtime environment
+- [MongoDB](https://www.mongodb.com/) - NoSQL database
 
-## Setup
 
-To run this project, install it locally using npm:
+## Live Site
 
-```
-$ npm install
-$ npm run dev
-```
+[Your Website's Live Site](https://mindfulmove.netlify.app/)
 
-## Server Repo
-
-- https://github.com/programming-hero-web-course-4/b7a11-toy-marketplace-server-side-shahjalal-bu
-
-## Server Host Link
-
-- https://edu-toys-hub-server.vercel.app
-
-## Client Site Repo
-
-- https://github.com/programming-hero-web-course-4/b7a11-toy-marketplace-client-side-shahjalal-bu
-
-## Client Site Host Link
-
-- https://edu-toys-fun.web.app/
-
-Thank you
