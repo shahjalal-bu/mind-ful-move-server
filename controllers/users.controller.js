@@ -159,3 +159,32 @@ module.exports.selecteClass = async (req, res) => {
     res.status(500).send("Error pushing class ID to database");
   }
 };
+
+//delete class form user
+
+module.exports.deleteClass = async (req, res) => {
+  const userEmail = req.params.email;
+  const classId = req.body.classId;
+  console.log(classId);
+  try {
+    const user = await usersCollection.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const classObjectId = new ObjectId(classId);
+
+    if (!user.selectedClasses.find((c) => c.equals(classObjectId))) {
+      return res.status(400).send("Class not selected");
+    }
+
+    await usersCollection.updateOne(
+      { email: userEmail },
+      { $pull: { selectedClasses: classObjectId } }
+    );
+
+    res.send("Class ID removed from database");
+  } catch (error) {
+    res.status(500).send("Error removing class ID from database");
+  }
+};
