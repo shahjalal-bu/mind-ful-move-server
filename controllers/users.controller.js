@@ -5,6 +5,34 @@ module.exports.findAll = async (req, res) => {
   let classes = await usersCollection.find().toArray();
   res.send(classes);
 };
+// module.exports.findOne = async (req, res) => {
+//   const userEmail = req.params.email;
+//   try {
+//     const userWithClasses = await usersCollection
+//       .aggregate([
+//         {
+//           $match: { email: userEmail },
+//         },
+//         {
+//           $lookup: {
+//             from: "classes",
+//             localField: "classes",
+//             foreignField: "_id",
+//             as: "classes",
+//           },
+//         },
+//       ])
+//       .toArray();
+
+//     if (userWithClasses.length === 0) {
+//       return res.status(404).send("User not found");
+//     }
+
+//     res.send(userWithClasses[0]);
+//   } catch (error) {
+//     res.status(500).send("Error retrieving user with classes");
+//   }
+// };
 module.exports.findOne = async (req, res) => {
   const userEmail = req.params.email;
   try {
@@ -12,6 +40,14 @@ module.exports.findOne = async (req, res) => {
       .aggregate([
         {
           $match: { email: userEmail },
+        },
+        {
+          $lookup: {
+            from: "classes",
+            localField: "selectedClasses",
+            foreignField: "_id",
+            as: "selectedClasses",
+          },
         },
         {
           $lookup: {
@@ -99,10 +135,27 @@ module.exports.makeInstructor = async (req, res) => {
 
 module.exports.selecteClass = async (req, res) => {
   const userEmail = req.params.email;
-  const classId = req.body.classId;
-  usersCollection.updateOne(
-    { email: userEmail },
-    { $push: { selectedClasses: classId } }
-  );
-  res.send("Class ID pushed to database");
+  const classId = new ObjectId(req.body.classId);
+
+  try {
+    const user = await usersCollection.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const classExists = user.selectedClasses.some((selectedClass) =>
+      selectedClass.equals(classId)
+    );
+    if (classExists) {
+      return res.send({ error: true, message: "Class already selected" });
+    } else {
+      await usersCollection.updateOne(
+        { email: userEmail },
+        { $addToSet: { selectedClasses: classId } }
+      );
+      res.send({ error: false, message: "Class selected" });
+    }
+  } catch (error) {
+    res.status(500).send("Error pushing class ID to database");
+  }
 };
