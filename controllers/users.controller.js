@@ -194,7 +194,6 @@ module.exports.deleteClass = async (req, res) => {
 module.exports.payment = async (req, res) => {
   const userEmail = req.params.email;
   const classId = req.body.classId;
-  const paymentAmount = req.body.price;
   const transactionId = req.body.transactionId;
   const date = req.body.date;
   try {
@@ -214,7 +213,7 @@ module.exports.payment = async (req, res) => {
           paymentClasses: {
             classId,
             classData,
-            paymentAmount,
+            paymentAmount: classData?.price,
             transactionId,
             date,
           },

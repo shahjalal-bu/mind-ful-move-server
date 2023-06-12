@@ -15,7 +15,8 @@ require("./db");
 //routes
 const classesRouter = require("./routes/classes");
 const usersRouter = require("./routes/users");
-const { paymentCollection } = require("./db");
+const { paymentCollection, classesCollection } = require("./db");
+const { ObjectId } = require("mongodb");
 //middleware
 app.use(express.json());
 app.use(cors());
@@ -34,9 +35,11 @@ app.get("/", (req, res) => {
 
 //create payment intent
 app.post("/create-payment-intent", varifyJWT, async (req, res) => {
-  const { price } = req.body;
-  console.log(price);
-  const amount = parseInt(price * 100);
+  const { classId } = req.body;
+  const classObjectId = new ObjectId(classId);
+  const query = { _id: classObjectId };
+  const classData = await classesCollection.findOne(query);
+  const amount = parseInt(+classData?.price * 100);
   const paymentIntent = await stripe.paymentIntents.create({
     amount: amount,
     currency: "usd",
@@ -47,18 +50,6 @@ app.post("/create-payment-intent", varifyJWT, async (req, res) => {
     clientSecret: paymentIntent.client_secret,
   });
 });
-
-// payment related api
-// app.post("/payments", varifyJWT, async (req, res) => {
-//   const payment = req.body;
-//   const insertResult = await paymentCollection.insertOne(payment);
-//   const query = {
-//     // _id: { $in: payment.cartItems.map((id) => new ObjectId(id)) },
-//   };
-//   // const deleteResult = await cartCollection.deleteMany(query);
-
-//   res.send({ insertResult, deleteResult });
-// });
 
 //jwt
 app.post("/jwt", (req, res) => {
