@@ -14,5 +14,6 @@ router.get(
 router.patch("/make-instructor/:id", usersController.makeInstructor);
 router.patch("/select-class/:email", usersController.selecteClass);
 router.patch("/delete-class/:email", usersController.deleteClass);
+router.patch("/payment/:email", varifyJWT, usersController.payment);
 
 module.exports = router;

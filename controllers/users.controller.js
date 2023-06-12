@@ -1,4 +1,4 @@
-const { usersCollection } = require("../db");
+const { usersCollection, classesCollection } = require("../db");
 const { ObjectId } = require("mongodb");
 
 module.exports.findAll = async (req, res) => {
@@ -186,5 +186,46 @@ module.exports.deleteClass = async (req, res) => {
     res.send("Class ID removed from database");
   } catch (error) {
     res.status(500).send("Error removing class ID from database");
+  }
+};
+
+//after payemet class add to user
+
+module.exports.payment = async (req, res) => {
+  const userEmail = req.params.email;
+  const classId = req.body.classId;
+  const paymentAmount = req.body.price;
+  const transactionId = req.body.transactionId;
+  const date = req.body.date;
+  try {
+    // Remove selected class from selectedClasses array
+    const classObjectId = new ObjectId(classId);
+    await usersCollection.updateOne(
+      { email: userEmail },
+      { $pull: { selectedClasses: classObjectId } }
+    );
+    // Add selected class to paymentClasses array with additional data
+    await usersCollection.updateOne(
+      { email: userEmail },
+      {
+        $addToSet: {
+          paymentClasses: {
+            classId,
+            paymentAmount,
+            transactionId,
+            date,
+          },
+        },
+      }
+    );
+    // Decrease available seat count and increase enrolled student count
+    await classesCollection.updateOne(
+      { _id: classObjectId, availableSeats: { $gt: 0 } },
+      { $inc: { availableSeats: -1, enrolledStudents: 1 } }
+    );
+
+    res.send("Payment processed successfully");
+  } catch (error) {
+    res.status(500).send("Error processing payment");
   }
 };

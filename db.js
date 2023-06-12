@@ -27,3 +27,7 @@ module.exports.usersCollection = client.db("mindfulmove").collection("users");
 module.exports.classesCollection = client
   .db("mindfulmove")
   .collection("classes");
+//all collections
+module.exports.paymentCollection = client
+  .db("mindfulmove")
+  .collection("payments");
