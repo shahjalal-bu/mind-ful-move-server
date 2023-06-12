@@ -200,6 +200,8 @@ module.exports.payment = async (req, res) => {
   try {
     // Remove selected class from selectedClasses array
     const classObjectId = new ObjectId(classId);
+    const query = { _id: classObjectId };
+    const classData = await classesCollection.findOne(query);
     await usersCollection.updateOne(
       { email: userEmail },
       { $pull: { selectedClasses: classObjectId } }
@@ -211,6 +213,7 @@ module.exports.payment = async (req, res) => {
         $addToSet: {
           paymentClasses: {
             classId,
+            classData,
             paymentAmount,
             transactionId,
             date,
