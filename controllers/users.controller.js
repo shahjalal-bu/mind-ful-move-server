@@ -1,38 +1,46 @@
-const { usersCollection, classesCollection } = require("../db");
+const {
+  usersCollection,
+  classesCollection,
+  paymentCollection,
+} = require("../db");
 const { ObjectId } = require("mongodb");
 
 module.exports.findAll = async (req, res) => {
-  let classes = await usersCollection.find().toArray();
-  res.send(classes);
+  try {
+    const userWithClasses = await usersCollection
+      .aggregate([
+        {
+          $match: {},
+        },
+        {
+          $lookup: {
+            from: "classes",
+            localField: "selectedClasses",
+            foreignField: "_id",
+            as: "selectedClasses",
+          },
+        },
+        {
+          $lookup: {
+            from: "classes",
+            localField: "classes",
+            foreignField: "_id",
+            as: "classes",
+          },
+        },
+      ])
+      .toArray();
+
+    if (userWithClasses.length === 0) {
+      return res.status(404).send("User not found");
+    }
+
+    res.send(userWithClasses);
+  } catch (error) {
+    res.status(500).send("Error retrieving user with classes");
+  }
 };
-// module.exports.findOne = async (req, res) => {
-//   const userEmail = req.params.email;
-//   try {
-//     const userWithClasses = await usersCollection
-//       .aggregate([
-//         {
-//           $match: { email: userEmail },
-//         },
-//         {
-//           $lookup: {
-//             from: "classes",
-//             localField: "classes",
-//             foreignField: "_id",
-//             as: "classes",
-//           },
-//         },
-//       ])
-//       .toArray();
 
-//     if (userWithClasses.length === 0) {
-//       return res.status(404).send("User not found");
-//     }
-
-//     res.send(userWithClasses[0]);
-//   } catch (error) {
-//     res.status(500).send("Error retrieving user with classes");
-//   }
-// };
 module.exports.findOne = async (req, res) => {
   const userEmail = req.params.email;
   try {
@@ -205,21 +213,26 @@ module.exports.payment = async (req, res) => {
       { email: userEmail },
       { $pull: { selectedClasses: classObjectId } }
     );
+
+    const paymentData = {
+      paymentBy: userEmail,
+      classId,
+      classData,
+      paymentAmount: classData?.price,
+      transactionId,
+      date,
+    };
     // Add selected class to paymentClasses array with additional data
     await usersCollection.updateOne(
       { email: userEmail },
       {
         $addToSet: {
-          paymentClasses: {
-            classId,
-            classData,
-            paymentAmount: classData?.price,
-            transactionId,
-            date,
-          },
+          paymentClasses: paymentData,
         },
       }
     );
+    //add payment to payment collection
+    await paymentCollection.insertOne(paymentData);
     // Decrease available seat count and increase enrolled student count
     await classesCollection.updateOne(
       { _id: classObjectId, availableSeats: { $gt: 0 } },

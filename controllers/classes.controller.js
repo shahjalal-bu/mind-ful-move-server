@@ -34,8 +34,6 @@ module.exports.addClass = async (req, res) => {
   });
 };
 
-
-
 //update class status to approved
 
 module.exports.aprrovedClass = async (req, res) => {

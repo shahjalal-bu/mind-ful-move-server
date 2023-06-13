@@ -9,14 +9,16 @@ const morgan = require("morgan");
 const app = express();
 const port = 5000 || process.env.PORT;
 const { varifyJWT } = require("./middlewares/middlewares");
+const { paymentCollection, classesCollection } = require("./db");
+const { ObjectId } = require("mongodb");
 //db
 require("./db");
 
 //routes
 const classesRouter = require("./routes/classes");
 const usersRouter = require("./routes/users");
-const { paymentCollection, classesCollection } = require("./db");
-const { ObjectId } = require("mongodb");
+const paymentRouter = require("./routes/payment");
+
 //middleware
 app.use(express.json());
 app.use(cors());
@@ -62,6 +64,7 @@ app.post("/jwt", (req, res) => {
 
 app.use("/classes", classesRouter);
 app.use("/users", usersRouter);
+app.use("/payment", paymentRouter);
 
 app.listen(port, () => {
   console.log(`Mindfulmove listening on port ${port}`);
