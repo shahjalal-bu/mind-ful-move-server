@@ -75,3 +75,14 @@ module.exports.feedbackClass = async (req, res) => {
   const result = await classesCollection.updateOne(filter, updateDoc);
   res.send(result);
 };
+
+//update class feedback
+module.exports.updateClass = async (req, res) => {
+  const id = req.params.classId;
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: req.body,
+  };
+  const result = await classesCollection.updateOne(filter, updateDoc);
+  res.send(result);
+};

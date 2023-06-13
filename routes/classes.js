@@ -12,5 +12,6 @@ router.patch(
 );
 router.patch("/denied-class/:classId", classesController.deniedClass);
 router.patch("/feedback-class/:classId", classesController.feedbackClass);
+router.patch("/update-class/:classId", classesController.updateClass);
 
 module.exports = router;
